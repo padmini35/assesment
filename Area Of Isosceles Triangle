@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class AreaOfIsoscelesTriangle {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input base and equal side
+        System.out.print("Enter the base of the isosceles triangle: ");
+        double base = sc.nextDouble();
+
+        System.out.print("Enter the equal side of the isosceles triangle: ");
+        double side = sc.nextDouble();
+
+        // Calculate height using Pythagoras theorem
+        double height = Math.sqrt(side * side - (base * base) / 4);
+
+        // Calculate area using formula: (1/2) * base * height
+        double area = 0.5 * base * height;
+
+        // Print result
+        System.out.println("The area of the isosceles triangle is: " + area);
+
+        sc.close();
+    }
+}
