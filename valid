@@ -1,0 +1,26 @@
+public class MinimumAddParentheses {
+    public static int minAddToMakeValid(String s) {
+        int balance = 0;  // tracks unmatched '('
+        int additions = 0; // tracks needed ')'
+
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                balance++;
+            } else { // c == ')'
+                if (balance > 0) {
+                    balance--; // match with previous '('
+                } else {
+                    additions++; // need an extra '('
+                }
+            }
+        }
+        return balance + additions; // unmatched '(' + needed ')'
+    }
+
+    public static void main(String[] args) {
+        System.out.println(minAddToMakeValid("())"));   // 1
+        System.out.println(minAddToMakeValid("((("));   // 3
+        System.out.println(minAddToMakeValid("()"));    // 0
+        System.out.println(minAddToMakeValid("()))(("));// 4
+    }
+}
