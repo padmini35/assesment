@@ -1,0 +1,32 @@
+import java.util.Arrays;
+
+public class RichestCustomerWealth {
+    public static void main(String[] args) {
+        // Example input
+        int[][] accounts = {
+            {1, 2, 3},
+            {3, 2, 1}
+        };
+
+        // Call method
+        int richest = maximumWealth(accounts);
+
+        // Print result
+        System.out.println("The richest customer wealth is: " + richest);
+    }
+
+    // Method to calculate maximum wealth
+    public static int maximumWealth(int[][] accounts) {
+        int maxWealth = 0;
+
+        for (int[] customer : accounts) {
+            int wealth = 0;
+            for (int bank : customer) {
+                wealth += bank;
+            }
+            maxWealth = Math.max(maxWealth, wealth);
+        }
+
+        return maxWealth;
+    }
+}
