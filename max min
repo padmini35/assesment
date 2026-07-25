@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+
+public class MinMaxRecursion {
+    // Helper recursive function
+    public static ArrayList<Integer> findMinMaxRec(int[] arr, int index) {
+        // Base case: only one element
+        if (index == 0) {
+            ArrayList<Integer> base = new ArrayList<>();
+            base.add(arr[0]); // min
+            base.add(arr[0]); // max
+            return base;
+        }
+
+        // Recursive call for first index elements
+        ArrayList<Integer> result = findMinMaxRec(arr, index - 1);
+
+        // Update min
+        if (arr[index] < result.get(0)) result.set(0, arr[index]);
+
+        // Update max
+        if (arr[index] > result.get(1)) result.set(1, arr[index]);
+
+        return result;
+    }
+
+    public static ArrayList<Integer> findMinMax(int[] arr) {
+        return findMinMaxRec(arr, arr.length - 1);
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 4, 3, -5, -4, 8, 6};
+        ArrayList<Integer> res = findMinMax(arr);
+        System.out.println("Min: " + res.get(0) + ", Max: " + res.get(1));
+    }
+}
