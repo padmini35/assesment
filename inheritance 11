@@ -1,0 +1,29 @@
+// Base class
+class Animal {
+    void eat() {
+        System.out.println("Animals eat food.");
+    }
+}
+
+// Derived class
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks.");
+    }
+}
+
+// Further derived class
+class Puppy extends Dog {
+    void weep() {
+        System.out.println("Puppy weeps.");
+    }
+}
+
+public class MultilevelInheritance {
+    public static void main(String[] args) {
+        Puppy p = new Puppy();
+        p.eat();   // inherited from Animal
+        p.bark();  // inherited from Dog
+        p.weep();  // defined in Puppy
+    }
+}
