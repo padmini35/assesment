@@ -1,0 +1,26 @@
+// Definition for singly-linked list.
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int x) { val = x; }
+}
+
+public class ConvertBinaryLinkedList {
+    public static int getDecimalValue(ListNode head) {
+        int result = 0;
+        while (head != null) {
+            result = result * 2 + head.val; // shift left and add current bit
+            head = head.next;
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        // Example: Linked list 1 -> 0 -> 1
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(0);
+        head.next.next = new ListNode(1);
+
+        System.out.println(getDecimalValue(head)); // Output: 5
+    }
+}
