@@ -1,0 +1,44 @@
+import java.util.*;
+
+public class ParsingBooleanExpression {
+    public static boolean parseBoolExpr(String expression) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : expression.toCharArray()) {
+            if (c == ',' || c == '(') continue;
+
+            if (c == 't' || c == 'f' || c == '!' || c == '&' || c == '|') {
+                stack.push(c);
+            } else if (c == ')') {
+                int tCount = 0, fCount = 0;
+
+                // Pop until operator
+                while (stack.peek() == 't' || stack.peek() == 'f') {
+                    if (stack.pop() == 't') tCount++;
+                    else fCount++;
+                }
+
+                char operator = stack.pop();
+                char result;
+
+                if (operator == '!') {
+                    result = (fCount == 1 && tCount == 0) ? 't' : 'f';
+                } else if (operator == '&') {
+                    result = (fCount == 0) ? 't' : 'f';
+                } else { // operator == '|'
+                    result = (tCount > 0) ? 't' : 'f';
+                }
+
+                stack.push(result);
+            }
+        }
+
+        return stack.pop() == 't';
+    }
+
+    public static void main(String[] args) {
+        System.out.println(parseBoolExpr("&(|(f))"));      // false
+        System.out.println(parseBoolExpr("|(f,f,f,t)"));   // true
+        System.out.println(parseBoolExpr("!(&(f,t))"));    // true
+    }
+}
