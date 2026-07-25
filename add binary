@@ -1,0 +1,17 @@
+public class AddBinary {
+    public static String addBinary(String a, String b) {
+        int num1 = Integer.parseInt(a, 2); // convert binary string to integer
+        int num2 = Integer.parseInt(b, 2);
+
+        int sum = num1 + num2;
+
+        return Integer.toBinaryString(sum); // convert back to binary string
+    }
+
+    public static void main(String[] args) {
+        String a = "1010"; // binary for 10
+        String b = "1101"; // binary for 13
+
+        System.out.println("Binary Sum: " + addBinary(a, b)); // Output: 10111 (23)
+    }
+}
