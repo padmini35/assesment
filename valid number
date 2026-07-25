@@ -1,0 +1,46 @@
+public class ValidNumber {
+    public static boolean isNumber(String s) {
+        s = s.trim(); // remove leading/trailing spaces
+        if (s.isEmpty()) return false;
+
+        boolean seenDigit = false;
+        boolean seenDot = false;
+        boolean seenExp = false;
+        boolean digitAfterExp = true;
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if (Character.isDigit(c)) {
+                seenDigit = true;
+                if (seenExp) digitAfterExp = true;
+            } else if (c == '+' || c == '-') {
+                // sign only allowed at start or right after exponent
+                if (i != 0 && s.charAt(i - 1) != 'e' && s.charAt(i - 1) != 'E') {
+                    return false;
+                }
+            } else if (c == '.') {
+                // dot only allowed once and before exponent
+                if (seenDot || seenExp) return false;
+                seenDot = true;
+            } else if (c == 'e' || c == 'E') {
+                // exponent only allowed once and after a digit
+                if (seenExp || !seenDigit) return false;
+                seenExp = true;
+                digitAfterExp = false; // must see digit after exponent
+            } else {
+                return false; // invalid character
+            }
+        }
+
+        return seenDigit && digitAfterExp;
+    }
+
+    public static void main(String[] args) {
+        String[] tests = {"2", "0089", "-0.1", "+3.14", "4.", "-.9", "2e10", "-90E3", "3e+7", "+6e-1", "53.5e93", "-123.456e789", "abc", "1a", "1e", "e3", "99e2.5", "--6", "-+3", "95a54e53"};
+
+        for (String test : tests) {
+            System.out.println(test + " -> " + isNumber(test));
+        }
+    }
+}
