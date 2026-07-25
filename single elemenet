@@ -1,0 +1,30 @@
+public class SingleElementSortedArray {
+    public static int singleNonDuplicate(int[] nums) {
+        int low = 0, high = nums.length - 1;
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+
+            // Ensure mid is even (pair starts at even index)
+            if (mid % 2 == 1) mid--;
+
+            if (nums[mid] == nums[mid + 1]) {
+                // Single element is after this pair
+                low = mid + 2;
+            } else {
+                // Single element is before or at mid
+                high = mid;
+            }
+        }
+
+        return nums[low];
+    }
+
+    public static void main(String[] args) {
+        int[] nums1 = {1,1,2,3,3,4,4,8,8};
+        int[] nums2 = {3,3,7,7,10,11,11};
+
+        System.out.println("Single element in nums1: " + singleNonDuplicate(nums1)); // Output: 2
+        System.out.println("Single element in nums2: " + singleNonDuplicate(nums2)); // Output: 10
+    }
+}
