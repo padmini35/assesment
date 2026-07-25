@@ -1,0 +1,33 @@
+public class JumpGameVII {
+    public static boolean canReach(String s, int minJump, int maxJump) {
+        int n = s.length();
+        boolean[] dp = new boolean[n];
+        dp[0] = true;
+
+        int reachableCount = 0; // prefix sum counter
+
+        for (int i = 1; i < n; i++) {
+            if (i >= minJump) {
+                reachableCount += dp[i - minJump] ? 1 : 0;
+            }
+            if (i > maxJump) {
+                reachableCount -= dp[i - maxJump - 1] ? 1 : 0;
+            }
+
+            // Mark position reachable if s[i] == '0' and prefix sum > 0
+            dp[i] = (s.charAt(i) == '0' && reachableCount > 0);
+        }
+
+        return dp[n - 1];
+    }
+
+    public static void main(String[] args) {
+        String s1 = "011010";
+        int minJump1 = 2, maxJump1 = 3;
+        System.out.println("Can reach? " + canReach(s1, minJump1, maxJump1)); // true
+
+        String s2 = "01101110";
+        int minJump2 = 2, maxJump2 = 3;
+        System.out.println("Can reach? " + canReach(s2, minJump2, maxJump2)); // false
+    }
+}
