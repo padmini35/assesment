@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class AdditionUsingMethod {
+
+    // Method to add two numbers
+    public static int addNumbers(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input two numbers
+        System.out.print("Enter first number: ");
+        int num1 = sc.nextInt();
+
+        System.out.print("Enter second number: ");
+        int num2 = sc.nextInt();
+
+        // Call method to add numbers
+        int sum = addNumbers(num1, num2);
+
+        // Print result
+        System.out.println("The sum of " + num1 + " and " + num2 + " is: " + sum);
+
+        sc.close();
+    }
+}
