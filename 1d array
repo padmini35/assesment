@@ -1,0 +1,27 @@
+import java.util.Arrays;
+
+public class RunningSumOfArray {
+    public static void main(String[] args) {
+        // Example input
+        int[] nums = {1, 2, 3, 4};
+
+        // Call method
+        int[] ans = runningSum(nums);
+
+        // Print result
+        System.out.println("Running Sum: " + Arrays.toString(ans));
+    }
+
+    // Method to calculate running sum
+    public static int[] runningSum(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[n];
+
+        ans[0] = nums[0]; // first element remains same
+        for (int i = 1; i < n; i++) {
+            ans[i] = ans[i - 1] + nums[i];
+        }
+
+        return ans;
+    }
+}
