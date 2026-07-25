@@ -1,0 +1,38 @@
+import java.util.*;
+
+public class SpecialBinaryString {
+    public static String makeLargestSpecial(String s) {
+        if (s.length() <= 2) return s;
+
+        List<String> substrings = new ArrayList<>();
+        int count = 0, start = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '1') count++;
+            else count--;
+
+            if (count == 0) {
+                // Found a special substring
+                String inner = s.substring(start + 1, i);
+                substrings.add("1" + makeLargestSpecial(inner) + "0");
+                start = i + 1;
+            }
+        }
+
+        // Sort in reverse lexicographic order
+        Collections.sort(substrings, Collections.reverseOrder());
+
+        StringBuilder result = new StringBuilder();
+        for (String sub : substrings) result.append(sub);
+
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        String s1 = "11011000";
+        System.out.println(makeLargestSpecial(s1)); // Output: 11100100
+
+        String s2 = "10";
+        System.out.println(makeLargestSpecial(s2)); // Output: 10
+    }
+}
