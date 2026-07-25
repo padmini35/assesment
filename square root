@@ -1,0 +1,27 @@
+public class SqrtX {
+    public static void main(String[] args) {
+        int x = 8; // Example input
+        int result = mySqrt(x);
+        System.out.println("Square root of " + x + " is: " + result);
+    }
+
+    // Method to compute integer square root
+    public static int mySqrt(int x) {
+        if (x < 2) return x;
+
+        int left = 1, right = x / 2, ans = 0;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (mid <= x / mid) { // avoid overflow
+                ans = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return ans;
+    }
+}
